@@ -7,8 +7,8 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 struct Mem_if: public sc_interface {
-    virtual void write(unsigned addrY, unsigned addrX, int data)=0;
-    virtual int read(unsigned addrY, unsigned addrX)=0;
+    virtual void direct_write(int** block)=0;
+    virtual void direct_read(int** block)=0;
 };
 
 #endif

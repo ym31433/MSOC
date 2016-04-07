@@ -10,27 +10,28 @@
 void interchange::interchange_thread() {
     done->write(false);
     //cout << "INFO: "<< name() << " @ " << sc_time_stamp() << " Starting..." << endl;
-    long** temp = new long*[m_width];
+    int** temp = new int*[m_width];
+    int** block = new int*[m_width];
     for(int i = 0; i != m_width; ++i) {
-        temp[i] = new long[m_width];
+        temp[i] = new int[m_width];
+        block[i] = new int[m_width];
     }
-    for(int i = 0; i != m_width; ++i) {
-        for(int j = 0; j != m_width; ++j) {
-            temp[j][i] = mem->read(i, j);
-        }
-    }
+    mem->direct_read(block);
     cout << "INFO: Complete Memory read." << endl;
     for(int i = 0; i != m_width; ++i) {
         for(int j = 0; j != m_width; ++j) {
-            mem->write(i, j, temp[i][j]);
+            temp[j][i] = block[i][j];
         }
     }
+    mem->direct_write(temp);
     cout << "INFO: Complete Memory write." << endl;
     //cout << "INFO: "<< name() << " @ " << sc_time_stamp() << " Finished!" << endl;
     for(int i = 0; i != m_width; ++i) {
         delete [] temp[i];
+        delete [] block[i];
     }
     delete [] temp;
+    delete [] block;
     done->write(true);
 }//end testbench::test_thread()
 

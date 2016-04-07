@@ -50,18 +50,18 @@ struct memory: public sc_channel, Mem_if {
         delete [] m_mem;
     }
     // Interface implementations
-    void write(unsigned addrY, unsigned addrX, int data) {
-        if (addrX < m_width*m_width && addrY < m_width*m_width ) {
-            m_mem[addrY][addrX] = data;
+    void direct_write(int** block) {
+        for(int i = 0; i != m_width; ++i) {
+            for(int j = 0; j != m_width; ++j) {
+                m_mem[i][j] = block[i][j];
+            }
         }
     }
-    int read(unsigned addrY, unsigned addrX) {
-        if (addrX < m_width*m_width && addrY < m_width*m_width ) {
-            return m_mem[addrY][addrX];
-        } else {
-            cout << "ERROR:"<<name()<<"@"<<sc_time_stamp()
-                << ": Illegal address: " << addrY << ", " << addrX << endl;
-            return 0L;
+    void direct_read(int** block) {
+        for(int i = 0; i != m_width; ++i) {
+            for(int j = 0; j != m_width; ++j) {
+                block[i][j] = m_mem[i][j];
+            }
         }
     }
 private:

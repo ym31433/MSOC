@@ -8,7 +8,7 @@
 
 struct Mem_if: public sc_interface {
     virtual void word_write(unsigned addrY, unsigned addrX, int data)=0;
-    virtual int word_read(unsigned addrY, unsigned addrX)=0;
+    virtual void word_read(unsigned addrY, unsigned addrX, int& data)=0;
 };
 
 #endif

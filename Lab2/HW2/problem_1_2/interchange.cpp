@@ -16,7 +16,7 @@ void interchange::interchange_thread() {
     }
     for(int i = 0; i != m_width; ++i) {
         for(int j = 0; j != m_width; ++j) {
-            temp[j][i] = mem->word_read(i, j);
+            mem->word_read(i, j, temp[j][i]);
         }
     }
     cout << "INFO: Complete Memory read." << endl;

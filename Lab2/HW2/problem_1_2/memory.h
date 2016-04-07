@@ -55,13 +55,12 @@ struct memory: public sc_channel, Mem_if {
             m_mem[addrY][addrX] = data;
         }
     }
-    int word_read(unsigned addrY, unsigned addrX) {
+    void word_read(unsigned addrY, unsigned addrX, int& data) {
         if (addrX < m_width*m_width && addrY < m_width*m_width ) {
-            return m_mem[addrY][addrX];
+            data = m_mem[addrY][addrX];
         } else {
             cout << "ERROR:"<<name()<<"@"<<sc_time_stamp()
                 << ": Illegal address: " << addrY << ", " << addrX << endl;
-            return 0L;
         }
     }
 private:
