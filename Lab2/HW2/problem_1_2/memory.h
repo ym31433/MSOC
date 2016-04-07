@@ -64,7 +64,6 @@ struct memory: public sc_channel, Mem_if {
         }
     }
 private:
-    unsigned     m_base;
     unsigned     m_width;
     int**        m_mem;
     memory(const memory&); // Disable
